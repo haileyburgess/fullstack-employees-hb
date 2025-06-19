@@ -1,3 +1,14 @@
+import db from "#db/client";
+
+export async function getEmployees() {
+  const sql = `
+  SELECT *
+  FROM employees
+  `;
+  const { rows: employees } = await db.query(sql);
+  return employees;
+}
+
 /** @returns the employee created according to the provided details */
 export async function createEmployee({ name, birthday, salary }) {
   const sql = `
@@ -7,17 +18,17 @@ export async function createEmployee({ name, birthday, salary }) {
   `;
 
   const {
-    rows: [newRecord],
+    rows: [employee],
   } = await db.query(sql, [name, birthday, salary]);
-  return newRecord;
+  return employee;
 }
 
 // === Part 2 ===
 
 /** @returns all employees */
-export async function getEmployees() {
-  // TODO
-}
+// export async function getEmployees() {
+//   // TODO
+// }
 
 /**
  * @returns the employee with the given id
